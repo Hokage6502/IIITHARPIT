@@ -64,7 +64,7 @@ export default function HomePage() {
       axios.get('http://localhost:4000/datasets?' + params.toString()).then(res => {
         setItems(res.data);
       });
-      axios.get('http://localhost:4000/printrequest?').then(res => {
+      axios.get('http://localhost:4000/printrequest?'+ params.toString()).then(res => {
         setReqs(res.data);
       });
                   

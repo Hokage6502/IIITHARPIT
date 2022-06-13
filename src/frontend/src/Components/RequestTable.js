@@ -28,6 +28,12 @@ export default function RequestTable(props) {
           <th scope="col" className="px-6 py-3">
             Date
           </th>
+          <th scope="col" className="px-6 py-3">
+            
+          </th>
+          <th scope="col" className="px-6 py-3">
+          
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -66,7 +72,16 @@ export default function RequestTable(props) {
             <td className=''>
               {ver["Published"]}
             </td>
-
+            <div className="inline-flex rounded-md shadow">
+              <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-success-color-dark-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={() => {
+                  
+                }}>Accept</button>
+              </div>
+              <div className="inline-flex rounded-md shadow">
+              <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-danger-color-dark-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={() => {
+                  
+                }}>Reject</button>
+              </div>
             
           </tr>
         )}

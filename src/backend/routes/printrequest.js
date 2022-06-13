@@ -20,9 +20,10 @@ function execSql(statement, values) {
   }
 
 router.get("/", async (req, res) => {
-  console.log(req.query);
-      console.log('List all requests');
-      execSql('SELECT * FROM request ').then(rslt => res.json(rslt));
+  // console.log(req.query);
+  let {DatasetID, AuthorID, Status,userid} = req.query;
+      // console.log('List all requests');
+      execSql('SELECT * FROM request where AuthorID ="' + AuthorID + '"').then(rslt => res.json(rslt));
 });
 
 module.exports = router;

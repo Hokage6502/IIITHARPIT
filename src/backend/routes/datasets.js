@@ -93,10 +93,11 @@ router.post("/version", (req, res) => {
 
 router.get('/', (req, res) => {
 
-    console.log(req.query);
-    let {DatasetID, AuthorID, Status} = req.query;
-        console.log('List all datasets');
-        execSql('SELECT * FROM datasets').then(rslt => res.json(rslt))
+    // console.log(req.query);
+    let {DatasetID, AuthorID, Status,userid} = req.query;
+   
+    // const q1='SELECT * FROM datasets where AuthorID!=?'
+    execSql('SELECT * FROM datasets where AuthorID != "' + AuthorID + '"' ).then(rslt => res.json(rslt))
 });
 
 module.exports = router;

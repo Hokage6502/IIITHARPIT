@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
 });
 router.post("/print", async (req, res) => {
   console.log(req.query);
-      console.log('List all requests');
+      // console.log('List all requests');
       execSql('SELECT * FROM request').then(rslt => res.json(rslt));
 });
 

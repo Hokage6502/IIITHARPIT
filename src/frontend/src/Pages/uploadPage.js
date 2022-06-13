@@ -10,7 +10,7 @@ export default function UploadPage() {
   const [updateState, setUpdateState] = useState(0);
   const [metaEdit, setMetaEdit] = useState(false);
   const state = useLocation().state;
-  
+  let userid = localStorage.getItem('userid');
   // Metadata
   const [name, setName] = useState('');
   const [source, setSource] = useState('');
@@ -26,7 +26,7 @@ export default function UploadPage() {
   // File related
   const [files, setFiles] = useState([]);
   const [filenames, setFilenames] = useState([]);
-  let userid = localStorage.getItem('userid');
+  //let userid = localStorage.getItem('userid');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -88,7 +88,8 @@ export default function UploadPage() {
         'Public': isPublic ? '1' : '0',
         'Tnc': tnc.replace("'", ""),
         'Source': source,
-        'filenames': filenames
+        'filenames': filenames,
+        'userid': userid
       };
       console.log(body);
 
