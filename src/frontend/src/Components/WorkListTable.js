@@ -2,14 +2,49 @@ import { PaperClipIcon, DownloadIcon } from '@heroicons/react/solid';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 
+const backendAPI = 'http://localhost:4000/';
+var items;
+async function requestDatabaseAccess(props) {
+  let userid = localStorage.getItem('userid');
+  let res = await axios({
+    method: 'post',
+    url: backendAPI + 'request',
+    data: {
+      data: items,
+      id: props,
+      userid: userid
+      
+    }
+  });
+  console.log("REQUEST SENDED TO AUTHOR ")
+  //localStorage.clear();
+}
 export default function VersionTable(props) {
-    const items = props.items
+    items = props.items;
+    let userid = localStorage.getItem('userid');
     function PrivateDataset() {
       if (items.map.Public=="1") {
         return true;
       }
       return false;
     }
+    
+    // let dataid = localStorage.getItem('dataid');
+    // async function setdataidState(dataid = null) {
+    //   localStorage.setItem('dataid', dataid);
+    // }
+   
+
+    function downloadnow() {
+        /*let res = axios({
+          method: 'post',
+          url: 'http://localhost:4000/request',
+          data: {
+            data: items,
+            userid: userid
+          } });*/
+        console.log("DOWNLOADED ")
+        }
     
     return (
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg no-scrollbar px-10">
@@ -91,19 +126,20 @@ export default function VersionTable(props) {
             <td className=''>
               {ver["Published"]}
             </td>
-
-            <td class="px-6 py-4">
-              <button  onClick={() => {
-                if(ver["Public"]=="1" )
-                {
-
-                }
-                else
-                {
-                  
-                }
-              }}>{ver["Public"]=="1" ? 'Download Now' : 'Request'}</button>
-            </td>
+            <div className="inline-flex rounded-md shadow">
+              <button className="inline-flex rounded-md shadow" onClick={() => {
+                  if(ver["Public"]=="0" )
+                  {
+                    requestDatabaseAccess(ver["DatasetID"]);
+                    //setdataidState();
+                  }
+                  else
+                  {
+                    downloadnow();
+                  }
+                }}>{ver["Public"]=="1" ? 'Download Now' : 'Request'}</button>
+              </div>
+        
             
           </tr>
         )}

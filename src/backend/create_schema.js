@@ -54,6 +54,25 @@ con.query(versionsTable, (err, res) => {
     console.log("Versions Table created!");
 });
 
+var requestTable = `
+CREATE TABLE request(
+    ReqID int NOT NULL AUTO_INCREMENT,
+    DatasetID int NOT NULL,
+    AuthorID int NOT NULL,
+    UserID int NOT NULL,
+    Status ENUM("PENDING","APPROVED","REJECTED") DEFAULT "PENDING",
+    Published Datetime,
+    PRIMARY KEY(ReqID),
+    FOREIGN KEY (DatasetID) REFERENCES datasets(DatasetID),
+    FOREIGN KEY(AuthorID) REFERENCES users(UserID)
+);
+`
+
+con.query(requestTable, (err, res) => {
+    if (err) throw err;
+    console.log("Request Table created!");
+});
+
 var filesTable = `
 CREATE TABLE files(
     DatasetID int NOT NULL,

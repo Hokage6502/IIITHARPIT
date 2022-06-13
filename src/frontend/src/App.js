@@ -108,6 +108,7 @@ function App() {
       <br />
       <Routes>
         <Route exact path="/" element={<HomePage />}/>
+        <Route exact path="/home" element={<HomePage />}/>
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/comments" element={<CommentsPage />} />

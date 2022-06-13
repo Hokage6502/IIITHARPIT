@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Popup from "../Components/Popup"
 import WorkListTable from '../Components/WorkListTable'
+import RequestTable from '../Components/RequestTable'
 // import Modal from 'react-modal';
 // import axios from 'axios';
 // import Parser from 'html-react-parser';
@@ -43,6 +44,7 @@ export default function HomePage() {
     const [nav, setNav] = useState(false);
     const [id, setId] = useState(0);
     const [items, setItems] = useState([]);
+    const [reqs, setReqs] = useState([]);
     let userid = localStorage.getItem('userid');
     /*let [selectedDatabaseId, setSelectedDatabaseId] = useState(0);
     let [privateDatasetAccess, setPrivateDatasetAccess] = useState([]);
@@ -61,6 +63,9 @@ export default function HomePage() {
       // params.set('Status', 'PENDING');
       axios.get('http://localhost:4000/datasets?' + params.toString()).then(res => {
         setItems(res.data);
+      });
+      axios.get('http://localhost:4000/printrequest?').then(res => {
+        setReqs(res.data);
       });
                   
     })
@@ -92,6 +97,7 @@ export default function HomePage() {
           </div>
         </div>
         <WorkListTable items={items}/>
+        <RequestTable reqs={reqs}/>
       </div>
     )
   }
