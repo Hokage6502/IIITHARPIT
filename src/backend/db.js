@@ -9,7 +9,7 @@ var con = sql.createConnection({
 con.connect(err => {
     if(err) throw err;
     console.log("Connected");
-    const q = "USE dfs"
+    const q = "USE arpitdfs"
     con.query(q, (err, res) => {
         console.log(err)
         console.log(res)

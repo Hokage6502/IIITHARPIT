@@ -46,11 +46,11 @@ export default function HomePage() {
     const [items, setItems] = useState([]);
     const [reqs, setReqs] = useState([]);
     let userid = localStorage.getItem('userid');
-    /*let [selectedDatabaseId, setSelectedDatabaseId] = useState(0);
+    let [selectedDatabaseId, setSelectedDatabaseId] = useState(0);
     let [privateDatasetAccess, setPrivateDatasetAccess] = useState([]);
     let [selectedRow, setSelectedRow] = useState({});
     let [isPrivate, setIsPrivate] = useState(items);
-    let [modalOpen, setModalOpen] = useState(false);*/
+    let [modalOpen, setModalOpen] = useState(false);
     // let userid = localStorage.getItem('userid');
 
     const [agree, setAgree] = useState(false);

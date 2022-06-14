@@ -33,10 +33,5 @@ router.post("/", async (req, res) => {
   execSql(`INSERT INTO request ( database_name, database_id, AuthorID, request_from, status) VALUES ( '${databaseName}',${databaseId}, ${Authorid}, ${userid},'PENDING' )`).then(() => res.status(200));
 
 });
-router.post("/print", async (req, res) => {
-  console.log(req.query);
-      // console.log('List all requests');
-      execSql('SELECT * FROM request').then(rslt => res.json(rslt));
-});
 
 module.exports = router;

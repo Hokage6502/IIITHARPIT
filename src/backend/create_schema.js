@@ -1,10 +1,10 @@
-const sql = require('mysql');
+const sql = require('mysql2');
 
 var con = sql.createConnection({
     host: "localhost",
     user: "root",
     password: "1234",
-    database: "dfs"
+    database: "arpitdfs"
 });
 
 var usersTable = `
@@ -58,6 +58,7 @@ var requestTable = `
 CREATE TABLE request(
     ReqID int NOT NULL AUTO_INCREMENT,
     DatasetID int NOT NULL,
+    
     AuthorID int NOT NULL,
     UserID int NOT NULL,
     Status ENUM("PENDING","APPROVED","REJECTED") DEFAULT "PENDING",

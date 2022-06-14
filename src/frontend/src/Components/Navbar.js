@@ -27,7 +27,8 @@ export default function Navbar() {
       setLoggedIn(true);
     }
   }, []);
-  return (
+
+  return(
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
