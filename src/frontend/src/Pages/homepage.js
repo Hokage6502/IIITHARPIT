@@ -9,7 +9,7 @@ import RequestTable from '../Components/RequestTable'
 // import Parser from 'html-react-parser';
 
 
-const tc = "<div><b>Terms and Conditions of Website Use</b><br>The general terms under which you are allowed to use all the free as well as paid RANDOM.ORG services.<br>Terms for the Subscription Service<br>The additional terms under which RANDOM.ORG supplies paid services to you, including subscription-based services as well as services purchased on a once-off basis.<br>Data Processing Addendum<br>If you are a data controller based in the EEA or Switzerland, then the terms of this DPA will apply to any data processing that we carry out on your behalf.<br>Privacy Notice<br>What information we collect, how we collect it, what we do with it and how we protect it.<br>Cookie Policy<br>How we use cookies on our website.<br>List of Websites<br>The websites covered by our Terms and Conditions.<br><br></div>"
+
 
 function GetFeild(props) {
     return (
@@ -40,35 +40,57 @@ function Button(props) {
     )
 }
 
+const backendAPI = 'http://localhost:4000/';
+
+
 export default function HomePage() {
     const [nav, setNav] = useState(false);
     const [id, setId] = useState(0);
     const [items, setItems] = useState([]);
-    const [reqs, setReqs] = useState([]);
+    const [reqs,setReqs] = useState([]);
     let userid = localStorage.getItem('userid');
-    let [selectedDatabaseId, setSelectedDatabaseId] = useState(0);
-    let [privateDatasetAccess, setPrivateDatasetAccess] = useState([]);
-    let [selectedRow, setSelectedRow] = useState({});
-    let [isPrivate, setIsPrivate] = useState(items);
-    let [modalOpen, setModalOpen] = useState(false);
+    // let [selectedDatabaseId, setSelectedDatabaseId] = useState(0);
+    // let [privateDatasetAccess, setPrivateDatasetAccess] = useState([]);
+    // let [selectedRow, setSelectedRow] = useState({});
+    // let [isPrivate, setIsPrivate] = useState(items);
+    // let [modalOpen, setModalOpen] = useState(false);
     // let userid = localStorage.getItem('userid');
-
-    const [agree, setAgree] = useState(false);
-
-
+    // const [agree, setAgree] = useState(false);
 
     useEffect(() => {
       var params = new URLSearchParams();
       params.set('AuthorID', userid);
       // params.set('Status', 'PENDING');
+      // axios.all([
+      //  axios.get('http://localhost:4000/datasets?' + params.toString()).then(res => {
+      //  setItems(res.data);
+      //  }),
+      // axios.get('http://localhost:4000/printrequest?'+ params.toString()).then(res => {
+      // setReqs(res.data);
+      // }) 
       axios.get('http://localhost:4000/datasets?' + params.toString()).then(res => {
-        setItems(res.data);
-      });
-      axios.get('http://localhost:4000/printrequest?'+ params.toString()).then(res => {
-        setReqs(res.data);
-      });
-                  
+       setItems(res.data);
+      })
+    //  ])
     })
+
+    // useEffect(() => {
+    //   var params = new URLSearchParams();
+    //   params.set('AuthorID', userid);
+    //   // params.set('Status', 'PENDING');
+    //   axios.get('http://localhost:4000/datasets?' + params.toString()).then(res => {
+    //     setItems(res.data);
+    //   });        
+    // })
+
+    // async function requestTable() {
+    //   let userid = localStorage.getItem('userid');
+    //   var params = new URLSearchParams();
+    //       params.set('AuthorID', userid);
+    //   return axios.get('http://localhost:4000/printrequest?'+ params.toString()).then(res => {
+    //     reqs=(res.data);  })
+    // }
+
     return (
       <div className="bg-gray-50 max-h-full">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
@@ -96,8 +118,13 @@ export default function HomePage() {
           <Popup open={[nav, setNav]} component={<GetFeild state={id} setState={setId}/>} button={<Button state={id} />} />
           </div>
         </div>
+        <div className="max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+        <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <span className="block">                 Datasets to request from</span>
+        </h2>
+        </div>
         <WorkListTable items={items}/>
-        <RequestTable reqs={reqs}/>
+        
       </div>
     )
   }

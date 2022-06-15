@@ -98,7 +98,8 @@ import HomePage from './Pages/homepage';
 import ReviewPage from './Pages/reviewPage';
 import CommentsPage from './Pages/commentsPage';
 import UploaderPage from "./Pages/uploaderPage";
-import LoginPage from './Pages/loginPage';
+import RequestPage from "./Pages/request";
+
 
 function App() {
   return (
@@ -111,10 +112,10 @@ function App() {
         <Route exact path="/home" element={<HomePage />}/>
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/upload" element={<UploadPage />} />
+        <Route path="/request" element={<RequestPage />} />
         <Route path="/comments" element={<CommentsPage />} />
         <Route path="/uploader" element={<UploaderPage />} />
-        {/* <Route path="/login" element={<LoginPage />} /> */}
-        {/* <Redirect from="*" to="/404" /> */}
+        
       </Routes>
       </Router>
     </div>

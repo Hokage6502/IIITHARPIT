@@ -1,5 +1,6 @@
 import { PaperClipIcon, DownloadIcon } from '@heroicons/react/solid';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react"
 import axios from "axios";
 
 const backendAPI = 'http://localhost:4000/';
@@ -13,7 +14,6 @@ async function requestDatabaseAccess(props) {
       data: items,
       id: props,
       userid: userid
-      
     }
   });
   console.log("REQUEST SENDED TO AUTHOR ")
@@ -22,8 +22,9 @@ async function requestDatabaseAccess(props) {
 export default function VersionTable(props) {
     items = props.items;
     let userid = localStorage.getItem('userid');
-    function PrivateDataset() {
-      if (items.map.Public=="1") {
+    const haveaccess = false;
+    function PrivateDataset(props) {
+      if (props=="1") {
         return true;
       }
       return false;
@@ -128,6 +129,7 @@ export default function VersionTable(props) {
             </td>
             <div className="inline-flex rounded-md shadow">
               <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={() => {
+                  PrivateDataset(ver["Published"]);
                   if(ver["Public"]=="0" )
                   {
                     requestDatabaseAccess(ver["DatasetID"]);
@@ -137,7 +139,7 @@ export default function VersionTable(props) {
                   {
                     downloadnow();
                   }
-                }}>{ver["Public"]=="1" ? 'Download Now' : 'Request'}</button>
+                }}>{(PrivateDataset(ver["Public"]) || haveaccess) ? 'Download Now' : 'Request'}</button>
               </div>
         
             

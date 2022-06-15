@@ -1,3 +1,10 @@
+// const express = require('express');
+// const router = express.Router();
+// const { con, execSql } = require('../db');
+
+// function isEmpty(obj) {
+//   return Object.keys(obj).length === 0;
+// }
 const db = require('../db');
 const express = require('express');
 const sql = require('mysql');
@@ -19,14 +26,12 @@ function execSql(statement, values) {
     return p;
   }
 
-router.get("/", async (req, res) => {
-  // console.log(req.query);
-  let {DatasetID, AuthorID, tstatus,userid} = req.query;
-      // console.log('List all requests');
-      if(tstatus)
-      execSql('SELECT * FROM request where AuthorID ="' + AuthorID + '" AND status ="'+tstatus+'"').then(rslt => res.json(rslt));
-      else
-      execSql('SELECT * FROM request where AuthorID ="' + AuthorID + '"').then(rslt => res.json(rslt));
-});
+router.post('/', (req, res) => {
+    console.log("Response: ", req.body);
+    let status = req.body.status;
+    let reqid = parseInt(req.body.reqid);
+    execSql('UPDATE request SET Status="'+status+'" WHERE ReqID='+reqid+'').then(() => res.status(200));
+    res.json({"Status":"Changes Made"});
+})
 
-module.exports = router;
+module.exports = router

@@ -20,7 +20,7 @@ function execSql(statement, values) {
   }
 
 router.post("/", async (req, res) => {
-  console.log(req.body.id);
+  console.log(req.body);
   let databaseId = parseInt(req.body.id);
   let database = req.body.data[databaseId-1];
   let userid = parseInt(req.body.userid);
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
   let databaseName = database.Name;
 
   // console.log(`INSERT INTO database_access_request (database_name, database_id, request_from, status) VALUES (${databaseName}, ${databaseId}, ${userid}, 0)`)
-  execSql(`INSERT INTO request ( database_name, database_id, AuthorID, request_from, status) VALUES ( '${databaseName}',${databaseId}, ${Authorid}, ${userid},'PENDING' )`).then(() => res.status(200));
+  execSql(`INSERT INTO request ( database_name, database_id, AuthorID, request_from, status) VALUES ( '${databaseName}', ${databaseId}, ${Authorid}, ${userid},'PENDING' )`).then(() => res.status(200));
 
 });
 

@@ -10,6 +10,8 @@ import { Button } from 'react-bootstrap';
 const navigation = [
   { name: 'Upload', href: '/upload', current: true },
   { name: 'Review', href: '/review', current: true },
+  { name: 'Request', href: '/request', current: true }
+
 ]
 
 function classNames(...classes) {
